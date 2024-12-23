@@ -7,9 +7,12 @@ export const TodoList = () => {
 
   return (
     <div className={styles.container}>
-      {todos.map((todo) => (
-        <Todo key={todo.id} data={todo} />
-      ))}
+      <h2 className={styles.title}>Recent</h2>
+      <div className={styles.todos}>
+        {todos.map((todo) => (
+          <Todo key={todo.id} data={todo} />
+        ))}
+      </div>
     </div>
   );
 };

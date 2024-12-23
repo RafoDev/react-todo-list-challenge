@@ -1,6 +1,7 @@
 @use "../../styles/colors";
 
 .box {
+  box-sizing: border-box;
   background-color: colors.$white;
   position: relative;
   width: 100%;

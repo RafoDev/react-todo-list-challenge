@@ -1,0 +1,28 @@
+@use "../../shared/styles/colors";
+.nav {
+  background-color: colors.$dark-gray-500;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+.list {
+  display: flex;
+  justify-content: end;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 1rem;
+}
+.item {
+}
+.item:hover {
+  background-color: colors.$gray-500;
+}
+.link {
+  color: colors.$white;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}

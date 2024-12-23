@@ -20,13 +20,10 @@ export const TodoSchema = z
       .min(1, "Story points must be at least 1")
       .max(20, "Story points must not exceed 20"),
     assignee: UserSchema.shape.name,
-    dueDate: z
-      .string()
-      .datetime({ message: "Invalid date format" })
-      .refine(
-        (date) => new Date(date) > new Date(),
-        "Due date must be in the future"
-      ),
+    dueDate: z.string().refine((date) => {
+      const parsedDate = new Date(date);
+      return !isNaN(parsedDate.getTime()) && parsedDate >= new Date();
+    }, "Due Date must be a valid future date."),
     status: StatusEnum.default(STATUS[0]),
   })
   .transform((data) => {

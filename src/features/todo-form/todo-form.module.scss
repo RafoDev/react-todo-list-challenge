@@ -1,10 +1,9 @@
 @use "./../../shared/styles/colors";
 .form {
-  padding: 1rem;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  outline: 1px solid red;
 }
 .title {
   margin: 0;

@@ -5,8 +5,25 @@
   padding: 1rem;
 }
 .body {
-  background-color: colors.$gray-400;
   margin: 0;
+  background-color: colors.$gray-400;
   font-family: fonts.$roboto-font-family;
   color: colors.$dark-gray-900;
+}
+
+@media (min-width: 768px) {
+  .root {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 90%;
+    padding: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .root {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 1rem;
+  }
 }

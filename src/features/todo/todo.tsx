@@ -1,26 +1,18 @@
 import { RiCheckLine, RiCloseLine } from "@remixicon/react";
 import { Todo as TodoType } from "../../shared/schemas/todo-schema";
 import { useTodoStore } from "../../shared/store/useTodoStore";
-import { useState } from "react";
 import { Box } from "../../shared/ui/box/box";
 import styles from "./todo.module.scss";
 import { format, formatDistanceToNow } from "date-fns";
-import { es } from "date-fns/locale";
 import { capitalize } from "../../shared/util/capitalize";
 
 export const Todo = ({ data }: { data: TodoType }) => {
   const { toggleTodo, removeTodo } = useTodoStore();
-  const [isChecked, setIsChecked] = useState(data.status !== "active");
 
   const formatRelativeDate = (date: string) => {
     return formatDistanceToNow(new Date(date), {
       addSuffix: true,
     });
-  };
-
-  const handleOnChange = () => {
-    setIsChecked(!isChecked);
-    toggleTodo(data.id);
   };
 
   return (
@@ -43,13 +35,6 @@ export const Todo = ({ data }: { data: TodoType }) => {
           </p>
         </div>
         <div className={styles.actions}>
-          {/* <input
-            type="checkbox"
-            name="complete"
-            checked={isChecked}
-            onChange={handleOnChange}
-            className={styles.completeCheckbox}
-          /> */}
           <button
             className={styles.removeTask}
             onClick={() => {

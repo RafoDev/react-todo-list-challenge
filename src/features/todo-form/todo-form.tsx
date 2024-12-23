@@ -4,6 +4,7 @@ import { Todo, TodoSchema } from "../../shared/schemas/todo-schema";
 import { PRIORITIES } from "../../shared/schemas/priority-schema";
 import styles from "./todo-form.module.scss";
 import { FormField } from "./components/form-field/form-field";
+import { useTodoStore } from "../../shared/store/useTodoStore";
 
 export const TodoForm = () => {
   const {
@@ -11,9 +12,10 @@ export const TodoForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Todo>({ resolver: zodResolver(TodoSchema) });
+  const { addTodo } = useTodoStore();
 
   const onSubmit = (data: Todo) => {
-    console.log(data);
+    addTodo(data);
   };
 
   const today = new Date().toISOString().split("T")[0];

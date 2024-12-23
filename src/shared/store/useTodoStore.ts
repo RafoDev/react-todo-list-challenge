@@ -25,7 +25,12 @@ export const useTodoStore = create<TodoStore>()(
       toggleTodo: (id) =>
         set((state) => ({
           todos: state.todos.map((todo) =>
-            todo.id === id ? { ...todo, status: STATUS[1] } : todo
+            todo.id === id
+              ? {
+                  ...todo,
+                  status: todo.status === STATUS[1] ? STATUS[0] : STATUS[1],
+                }
+              : todo
           ),
         })),
       removeTodo: (id) =>

@@ -5,6 +5,8 @@ import { PRIORITIES } from "../../shared/schemas/priority-schema";
 import styles from "./todo-form.module.scss";
 import { FormField } from "./components/form-field/form-field";
 import { useTodoStore } from "../../shared/store/useTodoStore";
+import { capitalize } from "../../shared/util/capitalize";
+import { getTodayDate } from "../../shared/util/getTodayDate";
 
 export const TodoForm = () => {
   const {
@@ -20,7 +22,7 @@ export const TodoForm = () => {
     reset();
   };
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = getTodayDate();
 
   return (
     <>
@@ -47,12 +49,9 @@ export const TodoForm = () => {
             className={styles.input}
           >
             {PRIORITIES.map((priority) => {
-              const priorityCapitalized =
-                priority.charAt(0).toUpperCase() +
-                priority.slice(1).toLowerCase();
               return (
                 <option key={priority} value={priority}>
-                  {priorityCapitalized}
+                  {capitalize(priority)}
                 </option>
               );
             })}
@@ -93,7 +92,7 @@ export const TodoForm = () => {
           error={errors.dueDate?.message}
         >
           <input
-            type="date"
+            type="datetime-local"
             id="dueDate"
             {...register("dueDate")}
             defaultValue={today}

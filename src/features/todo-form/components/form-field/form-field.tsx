@@ -1,3 +1,4 @@
+import { Box } from "../../../../shared/ui/box/box";
 import styles from "../../todo-form.module.scss";
 import { ErrorMessage } from "../error-message/error-message";
 
@@ -12,11 +13,11 @@ export const FormField = ({
   children: React.ReactNode;
   error?: string;
 }) => (
-  <div className={styles.field}>
+  <Box>
     <ErrorMessage message={error} />
     <label htmlFor={id} className={styles.label}>
       {label}
     </label>
     {children}
-  </div>
+  </Box>
 );

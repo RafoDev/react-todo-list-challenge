@@ -10,12 +10,13 @@ export const TodoSchema = z.object({
     .nonempty("Task Name is required."),
   priority: PriorityEnum,
   storyPoints: z
-    .number()
-    .int("Story Points must be an integer.")
-    .positive("Story Points must be a positive number.")
-    .min(1, "Story Points must be at least 1.")
-    .max(20, "Story Points cannot exceed 20."),
-  assignee: UserSchema,
+    .string()
+    .transform((value) => Number(value))
+    .refine(
+      (value) => Number.isInteger(value) && value > 0 && value <= 20,
+      "Story Points must be an integer between 1 and 20."
+    ),
+  assignee: UserSchema.shape.name,
   dueDate: z.string().refine((date) => {
     const parsedDate = new Date(date);
     return !isNaN(parsedDate.getTime()) && parsedDate > new Date();

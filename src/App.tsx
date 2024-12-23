@@ -4,6 +4,7 @@ import { TodoForm } from "./features/todo-form/todo-form";
 import { TodoList } from "./features/todo-list/todo-list";
 import { Navbar } from "./features/navbar/navbar";
 import { Outlet, Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   return (
@@ -20,9 +21,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<TodoList />} />
-          <Route path="todoform" element={<TodoForm />} />
+          <Route path="form" element={<TodoForm />} />
         </Route>
       </Routes>
+      <Toaster />
     </>
   );
 };

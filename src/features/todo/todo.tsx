@@ -5,6 +5,7 @@ import { Box } from "../../shared/ui/box/box";
 import styles from "./todo.module.scss";
 import { format, formatDistanceToNow } from "date-fns";
 import { capitalize } from "../../shared/util/capitalize";
+import toast from "react-hot-toast";
 
 export const Todo = ({ data }: { data: TodoType }) => {
   const { toggleTodo, removeTodo } = useTodoStore();
@@ -13,6 +14,11 @@ export const Todo = ({ data }: { data: TodoType }) => {
     return formatDistanceToNow(new Date(date), {
       addSuffix: true,
     });
+  };
+
+  const handeRemove = () => {
+    removeTodo(data.id);
+    toast.success("Successfully removed!");
   };
 
   return (
@@ -43,12 +49,7 @@ export const Todo = ({ data }: { data: TodoType }) => {
           >
             <RiCheckLine />
           </button>
-          <button
-            className={styles.removeTask}
-            onClick={() => {
-              removeTodo(data.id);
-            }}
-          >
+          <button className={styles.removeTask} onClick={() => handeRemove()}>
             <RiCloseLine />
           </button>
         </div>

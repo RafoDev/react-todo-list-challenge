@@ -12,7 +12,7 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/todoform" className={styles.link}>
+          <Link to="/form" className={styles.link}>
             <RiAddCircleLine className={styles.icon} />
           </Link>
         </li>

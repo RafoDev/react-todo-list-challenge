@@ -11,88 +11,100 @@ export const TodoForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Todo>({ resolver: zodResolver(TodoSchema) });
   const { addTodo } = useTodoStore();
 
   const onSubmit = (data: Todo) => {
     addTodo(data);
+    reset();
   };
 
   const today = new Date().toISOString().split("T")[0];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <FormField id="name" label="Task Name" error={errors.name?.message}>
-        <input
-          type="text"
-          id="name"
-          {...register("name")}
-          className={styles.input}
-        />
-      </FormField>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <h2 className={styles.title}>New Todo</h2>
+        <FormField id="name" label="Task Name" error={errors.name?.message}>
+          <input
+            type="text"
+            id="name"
+            placeholder="Task Title"
+            {...register("name")}
+            className={styles.input}
+          />
+        </FormField>
 
-      <FormField
-        id="priority"
-        label="Priority"
-        error={errors.priority?.message}
-      >
-        <select
+        <FormField
           id="priority"
-          {...register("priority")}
-          className={styles.input}
+          label="Priority"
+          error={errors.priority?.message}
         >
-          {PRIORITIES.map((priority) => {
-            const priorityCapitalized =
-              priority.charAt(0).toUpperCase() +
-              priority.slice(1).toLowerCase();
-            return (
-              <option key={priority} value={priority}>
-                {priorityCapitalized}
-              </option>
-            );
-          })}
-        </select>
-      </FormField>
+          <select
+            id="priority"
+            {...register("priority")}
+            className={styles.input}
+          >
+            {PRIORITIES.map((priority) => {
+              const priorityCapitalized =
+                priority.charAt(0).toUpperCase() +
+                priority.slice(1).toLowerCase();
+              return (
+                <option key={priority} value={priority}>
+                  {priorityCapitalized}
+                </option>
+              );
+            })}
+          </select>
+        </FormField>
 
-      <FormField
-        id="storyPoints"
-        label="Story Points"
-        error={errors.storyPoints?.message}
-      >
-        <input
-          type="number"
+        <FormField
           id="storyPoints"
-          {...register("storyPoints")}
-          className={styles.input}
-        />
-      </FormField>
+          label="Story Points"
+          error={errors.storyPoints?.message}
+        >
+          <input
+            placeholder="1"
+            type="number"
+            id="storyPoints"
+            {...register("storyPoints")}
+            className={styles.input}
+          />
+        </FormField>
 
-      <FormField
-        id="assignee"
-        label="Assignee"
-        error={errors.assignee?.message}
-      >
-        <input
-          type="text"
+        <FormField
           id="assignee"
-          {...register("assignee")}
-          className={styles.input}
-        />
-      </FormField>
+          label="Assignee"
+          error={errors.assignee?.message}
+        >
+          <input
+            type="text"
+            id="assignee"
+            placeholder="Who will be in charge?"
+            {...register("assignee")}
+            className={styles.input}
+          />
+        </FormField>
 
-      <FormField id="dueDate" label="Due Date" error={errors.dueDate?.message}>
-        <input
-          type="date"
+        <FormField
           id="dueDate"
-          {...register("dueDate")}
-          defaultValue={today}
-          className={styles.input}
-        />
-      </FormField>
+          label="Due Date"
+          error={errors.dueDate?.message}
+        >
+          <input
+            type="date"
+            id="dueDate"
+            {...register("dueDate")}
+            defaultValue={today}
+            className={styles.input}
+          />
+        </FormField>
 
-      <button type="submit" className={styles.button}>
-        Create
-      </button>
-    </form>
+        <button type="submit" className={styles.button}>
+          Create Todo
+        </button>
+      </form>
+    </>
   );
 };

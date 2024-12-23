@@ -13,10 +13,10 @@ export const FormField = ({
   error?: string;
 }) => (
   <div className={styles.field}>
+    <ErrorMessage message={error} />
     <label htmlFor={id} className={styles.label}>
       {label}
     </label>
     {children}
-    <ErrorMessage message={error} />
   </div>
 );
